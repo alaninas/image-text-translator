@@ -8,7 +8,7 @@ Basic GCD App to upload pictures (containing text), read the text
 and translate it using Google Translator into French, English, Spanish and Japanese. 
 
 Set of languages is modifiable: by changing ENV variable TO_LANG 
-(see src/deply-functions.sh)
+(see src/deploy-functions.sh)
 and making sure translations are being saved to the appropriate bucket files 
 (see $PROJECT_NAME-result-bucket filenames in services).
 
