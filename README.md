@@ -43,14 +43,14 @@ Make sure environment variables and GCP setting are in accordance with the manua
 [OCR](https://cloud.google.com/functions/docs/tutorials/ocr)), 
 before running the app locally.
 
-* Run locally with npm: building the project for the first time need to 
-  deploy GCP functions
+* Run locally with npm: building the project for the first time 
+  (need to deploy GCP functions)
 ```
 cd src
 npm install
 npm run start:build
 ```
-* Running afterwards
+* Running locally after the initial build
 ```
 npm run start
 ```
