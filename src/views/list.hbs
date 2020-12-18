@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image Text Translator - Google Cloud App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <style>
+    .media img {
+      height: calc(100vh / 5);
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">Image Text Translator</div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/images">Images</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <h3>Images</h3>
+    <a href="/images/add" class="btn btn-success btn-sm">
+      <i class="glyphicon glyphicon-plus"></i>
+      <span> Add image</span>
+    </a>
+    {{#each images as |image|}}
+      <div class="media">
+        <a href="/images/{{image.id}}">
+          <div class="media-left">
+            {{#if image.imageUrl}}
+              <img src="{{image.imageUrl}}">
+            {{else}}
+              <img src="http://placekitten.com/g/128/192">
+            {{/if}}
+          </div>
+          <div class="media-body">
+            <h4>{{image.title}}</h4>
+            <p>{{image.tag}}</p>
+            {{#if image.translationUrlEn}}
+              <p>See available translations.</p>
+            {{else}}
+              <p>No tranlations available.</p>
+            {{/if}}
+          </div>
+        </a>
+      </div>
+    {{/each}}
+    {{#unless images.length}}
+      <p>No images found.</p>
+    {{/unless}}
+    {{#if nextPageToken}}
+      <nav>
+        <ul class="pager">
+          <li>
+            {{#if pageToken}}
+              <a href={{encodeURIComponent nextPageToken}}>More</a>
+            {{/if}}
+          </li>
+        </ul>
+      </nav>
+    {{/if}}
+  </div>
+</body>
+</html>

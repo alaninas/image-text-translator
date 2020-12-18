@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image Text Translator - Google Cloud App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <style>
+    .media img {
+      height: calc(100vh / 4);
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">Image Text Translator</div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/images">Images</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <h3>Image<small></small></h3>
+    <div class="btn-group">
+      <a href="/images/{{image.id}}/edit" class="btn btn-primary btn-sm">
+        <i class="glyphicon glyphicon-edit"></i>
+        <span> Edit image</span>
+      </a>
+      <a href="/images/{{image.id}}/delete" class="btn btn-danger btn-sm">
+        <i class="glyphicon glyphicon-trash"></i>
+        <span> Delete image</span>
+      </a>
+    </div>
+    <div class="media">
+      <div class="media-left">
+        {{#if image.imageUrl}}
+          <img src="{{image.imageUrl}}">
+        {{else}}
+          <img src="http://placekitten.com/g/128/192">
+        {{/if}}
+      </div>
+      <div class="media-body">
+        <h4>{{image.title}}</h4>
+        {{#if image.tag}}
+          <h5>{{image.tag}}</h5>
+        {{else}}
+          <h5>No tags.</h5>
+        {{/if}}
+        <p>{{image.description}}</p>
+        {{#if image.translationUrlEn}}
+          <div class="btn-group">
+            <a href="{{image.translationUrlEn}}" target="_blank" class="btn btn-primary btn-sm"><span> En </span></a>
+            <a href="{{image.translationUrlEs}}" target="_blank" class="btn btn-danger btn-sm"><span> Es </span></a>
+            <a href="{{image.translationUrlFr}}" target="_blank" class="btn btn-primary btn-sm"><span> Fr </span></a>
+            <a href="{{image.translationUrlJa}}" target="_blank" class="btn btn-danger btn-sm"><span> Ja </span></a>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
