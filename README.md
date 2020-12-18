@@ -38,11 +38,11 @@ This directory contains the code for deploying a basic Node.js app to Google Clo
 
 ## Project build and deploy
 
-Make sure environment variables and GCD setting are in accordance to the manuals, 
+Make sure environment variables and GCP setting are in accordance to the manuals, 
 before running the app locally.
 
 * Run locally with npm: building the project for the first time need to 
-  deploy GCD functions
+  deploy GCP functions
 ```
 cd src
 npm install
