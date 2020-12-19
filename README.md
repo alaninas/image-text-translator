@@ -54,8 +54,3 @@ npm run start:build
 ```
 npm run start
 ```
-
-* Run in the browser via App Engine
-```
-https://ocr-2020-298906.uc.r.appspot.com
-```
