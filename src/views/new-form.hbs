@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image Text Translator - Google Cloud App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/csss/new-form.css">
+</head>
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">Image Text Translator</div>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/images"><i class="glyphicon glyphicon-th-list"></i><span> Images</span></a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-plus"></i><span> Add Image</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <h3>{{action}} Image</h3>
+    <button class="btn btn-primary btn-sm" onclick="getLocation()" id="insert-geopoint">
+      <i class="glyphicon glyphicon-map-marker"></i><span> Insert your geolocation</span>
+    </button>
+    <button class="btn btn-danger btn-sm" onclick="removeLocation()" id="remove-geopoint">
+      <i class="glyphicon glyphicon-ban-circle"></i><span> Remove your geolocation</span>
+    </button>
+    <form class="image-form" method="POST" enctype="multipart/form-data">
+      <div class="form-group" id="geopoint-container">
+        <label for="geopoint">Your geolocation</label>
+        <input type="text" name="geopoint" id="geopoint" value="{{image.geopoint}}" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="{{image.title}}" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="tag">Tag</label>
+        <input type="text" name="tag" id="tag" value="{{image.tag}}" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="urgency">Is translation urgent?</label></br>
+        <input type="radio" name="urgency" id="urgency" value="yes" {{checked image.urgency 'yes'}}>Yes</br>
+        <input type="radio" name="urgency" id="urgency" value="no" {{checked image.urgency 'no'}}>No</br>
+      </div>
+      <div class="form-group">
+        <label for="image">Image to translate</label>
+        <input type="file" name="image" id="image" class="form-control" accept=".png, .jpg, .jpeg, .gif" onchange="handleFilesUpload()" required>
+      </div>
+      <div class="form-group hidden">
+        <label for="imageUrl">Image to translate URL</label><input type="text" name="imageUrl" id="imageUrl" value="{{image.imageUrl}}" class="form-control">
+      </div>
+      <button id="submit-button" type="submit" class="btn btn-success">Save</button>
+    </form>
+  </div>
+  <script>
+    const getLoc = document.getElementById("insert-geopoint");
+    const removeLoc = document.getElementById("remove-geopoint");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+    }
+    function showPosition(position) {
+      document.getElementById("geopoint").value = "Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;
+      document.getElementById("geopoint-container").style.display = "inherit";
+      getLoc.style.display = "none";
+      removeLoc.style.display = "inherit";
+    }
+    function removeLocation() {
+      document.getElementById("geopoint").value = undefined;
+      document.getElementById("geopoint-container").style.display = "none";
+      getLoc.style.display = "inherit";
+      removeLoc.style.display = "none";
+    }
+    function handleFilesUpload() {
+      const el = document.getElementById("image");
+      const fileExtension = el.files[0].name.split('.').pop();
+      const supportedTypes = /jpeg|jpg|png|gif/;
+      const isAPicture = supportedTypes.test(fileExtension.toLowerCase());
+      const errorDiv = document.createElement("div");
+      errorDiv.setAttribute("id", "file-error");
+      if (!isAPicture) {
+        if (!document.getElementById("file-error")) el.parentElement.appendChild(errorDiv);
+        errorDiv.innerHTML = `File format not supported. Provided file has extension: ${fileExtension}. Please select a picture.`;
+        el.parentElement.setAttribute("style", "color:#dd0505");
+        document.getElementById("submit-button").setAttribute("disabled", "");
+      } else {
+        el.parentElement.setAttribute("style", "color:inherit");
+        document.getElementById("file-error").remove();
+        document.getElementById("submit-button").removeAttribute("disabled");
+      }
+    }
+  </script>
+</body>
+</html>

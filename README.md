@@ -54,3 +54,7 @@ npm run start:build
 ```
 npm run start
 ```
+* Deploy to App Engine
+```
+gcloud app deploy
+```

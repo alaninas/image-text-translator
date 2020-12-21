@@ -5,12 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <style>
-    .media img {
-      height: calc(100vh / 4);
-      object-fit: cover;
-    }
-  </style>
+  <link rel="stylesheet" href="/csss/view.css">
 </head>
 <body>
   <div class="navbar navbar-default">
@@ -19,12 +14,13 @@
         <div class="navbar-brand">Image Text Translator</div>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="/images">Images</a></li>
+        <li><a href="/images"><i class="glyphicon glyphicon-th-list"></i><span> Images</span></a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-file"></i><span> Image #{{image.id}}</span></a></li>
       </ul>
     </div>
   </div>
   <div class="container">
-    <h3>Image<small></small></h3>
+    <h3>Image <small>#{{image.id}}</small></h3>
     <div class="btn-group">
       <a href="/images/{{image.id}}/edit" class="btn btn-primary btn-sm">
         <i class="glyphicon glyphicon-edit"></i>
@@ -35,7 +31,7 @@
         <span> Delete image</span>
       </a>
     </div>
-    <div class="media">
+    <div class="media view-image">
       <div class="media-left">
         {{#if image.imageUrl}}
           <img src="{{image.imageUrl}}">
@@ -44,19 +40,31 @@
         {{/if}}
       </div>
       <div class="media-body">
-        <h4>{{image.title}}</h4>
+        <h4><strong>Title:</strong> {{image.title}}</h4>
         {{#if image.tag}}
-          <h5>{{image.tag}}</h5>
+          <h5><strong>Tags:</strong> {{image.tag}}</h5>
         {{else}}
-          <h5>No tags.</h5>
+          <h5><strong>Tags:</strong> no tags</h5>
         {{/if}}
-        <p>{{image.description}}</p>
-        {{#if image.translationUrlEn}}
+        {{#exists image.urgency}}
+          <p><strong>Is translation urgent:</strong> {{image.urgency}}</p>
+        {{/exists}}
+        {{#if image.satisfaction}}
+          <p><strong>Accuracy of translation:</strong> {{image.satisfaction}}</p>
+        {{/if}}
+        {{#if image.timestamp}}
+          <p><strong>Last updated on:</strong> {{image.timestamp}}</p>
+        {{/if}}
+        {{#if image.geopoint}}
+          <p><strong>Geolocation:</strong> {{image.geopoint}}</p>
+        {{/if}}
+        {{#if image.translationUrl}}
+          <p><strong>Translations:</strong></p>
           <div class="btn-group">
-            <a href="{{image.translationUrlEn}}" target="_blank" class="btn btn-primary btn-sm"><span> En </span></a>
-            <a href="{{image.translationUrlEs}}" target="_blank" class="btn btn-danger btn-sm"><span> Es </span></a>
-            <a href="{{image.translationUrlFr}}" target="_blank" class="btn btn-primary btn-sm"><span> Fr </span></a>
-            <a href="{{image.translationUrlJa}}" target="_blank" class="btn btn-danger btn-sm"><span> Ja </span></a>
+            <a href="{{image.translationUrl.En}}" target="_blank" class="btn btn-primary btn-sm"><span> En </span></a>
+            <a href="{{image.translationUrl.Es}}" target="_blank" class="btn btn-danger btn-sm"><span> Es </span></a>
+            <a href="{{image.translationUrl.Fr}}" target="_blank" class="btn btn-primary btn-sm"><span> Fr </span></a>
+            <a href="{{image.translationUrl.Ja}}" target="_blank" class="btn btn-danger btn-sm"><span> Ja </span></a>
           </div>
         {{/if}}
       </div>

@@ -1,0 +1,46 @@
+.media.edit-image {
+    margin-bottom: .625rem;
+}
+.edit-image .media-left,
+.edit-image .media-body {
+  vertical-align: middle;
+}
+.media img {
+  height: calc(100vh / 6);
+  object-fit: cover;
+}
+form.image-form,
+.media.edit-image {
+    padding: .625rem;
+    border: .125rem solid lightgray;
+}
+form.image-form {
+  margin-top: .325rem;
+  margin-bottom: .325rem;
+  background: #d3d3d33b;
+}
+.form-group,
+.form-control {
+  padding: .325rem;
+}
+input[type="radio"] {
+    margin: .325rem;
+    margin-left: 0;
+}
+/* Geolocation setting/unsetting */
+.btn-danger#remove-geopoint {
+	background-color: #00000073;
+	border-color: #000000b5;
+}
+.btn-danger#remove-geopoint:hover {
+	background-color: #000000a6;
+}
+input:invalid {
+	/* background-color: pink; */
+	border: .125rem solid #dd0505;
+}
+/* Generated geopoint */
+input#geopoint {
+  color: rgba(106, 106, 106, 0.67);
+  pointer-events: none;
+}

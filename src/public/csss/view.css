@@ -1,0 +1,11 @@
+.media.view-image {
+  background: #d3d3d33b;
+  padding: .625rem;
+  border: .125rem solid lightgray;
+  margin-bottom: .325rem;
+}
+.media img {
+  height: calc(100vh / 2);
+  width: calc(100vw / 5);
+  object-fit: contain;
+}
