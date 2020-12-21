@@ -4,7 +4,7 @@
 
 # Image Text Translator App (ITT App)
 
-Basic GCD App to upload pictures (containing text), read the text 
+Basic GCP App to upload pictures (containing text), read the text 
 and translate it using Google Translator into French, English, Spanish and Japanese. 
 
 Set of languages is modifiable: by changing ENV variable TO_LANG 
